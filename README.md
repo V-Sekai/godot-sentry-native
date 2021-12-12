@@ -8,8 +8,19 @@ So far this has only been tested on Windows 10 using Godot 3.4 32 bit and Sentry
 Sentry-native also supports macOS, Linux, and Android. So this module should be usable on those platforms with minor tweaking of the instructions below.
 
 # Setup 
+This is a bit tricky to setup and get the folder structure right. After following the next couple of steps your folder structure should look like:
 
-## Compile Godot
+```
++-- godot
+|   +-- bin
++-- godot-sentry-native
+|   +-- example
+|   +-- modules
+|   +-- thirdparty
+|       +-- sentry-native
+```
+
+## Clone and Compile Godot
 First things first, you need to be able to build Godot from source
 See [Compiling](https://docs.godotengine.org/en/stable/development/compiling/index.html) in Godot Docs
 
@@ -17,31 +28,29 @@ Continue only once you've got Godot compiling and running. For the rest of the i
 
 ## Clone this repo
 1. git clone https://github.com/SilverCreekEntertainment/godot-sentry-native
-1. Or download zip https://github.com/SilverCreekEntertainment/godot-sentry-native/archive/refs/heads/master.zip
+1. Or download and extract zip https://github.com/SilverCreekEntertainment/godot-sentry-native/archive/refs/heads/master.zip
 
 ## Download Sentry Source Code
 1. Download latest release (Currently 0.4.12) of sentry-native.zip from  https://github.com/getsentry/sentry-native/releases
-1. Extract to godot-sentry-native/thirdparty/sentry-native
+1. Extract to `godot-sentry-native/thirdparty/sentry-native`
 
 ## Build Sentry dll
 We need the sentry.dll and sentry.lib built before building godot-sentry-native
-1. cd godot-sentry-native/thirdparty/sentry-native
+1. `cd godot-sentry-native/thirdparty/sentry-native`
 1. Run: `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"`
 1. Run: `cmake -B build -DSENTRY_BACKEND=crashpad -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSENTRY_BUILD_RUNTIMESTATIC=ON -A Win32  -S .`
 1. Run: `cmake --build build --config RelWithDebInfo --parallel`
 1. Copy files to your godot\bin\ folder:
-   * copy `godot-sentry-native\thirdparty\sentry-native\build\RelWithDebInfo\sentry.dll` to `godot\bin\`
-   * copy `godot-sentry-native\thirdparty\sentry-native\build\crashpad_build\handler\RelWithDebInfo\crashpad_handler.exe` to `godot\bin\`
+   * `copy build\RelWithDebInfo\sentry.dll ..\..\..\godot\bin\`
+   * `copy build\crashpad_build\handler\RelWithDebInfo\crashpad_handler.exe ..\..\..\godot\bin\`
 1. Close this cmd prompt and open a new one. Otherwise you might run into errors building godot
 
 
 ## Build Godot editor with godot-sentry-native
 This is to build Godot editor for testing integration
 1. cd to your godot folder
-1. Run: `scons target=release_debug bits=32 custom_modules=../godot-sentry-native/modules/sentry -j8`
-   * Be sure `../godot-sentry-native/modules/sentry` is the correct relative path from `godot` to `godot-sentry-native/modules/sentry`
-   * -j8  is to speed up compiling by running on multiple threads, change 8 to the number of cores your cpu has
-1. If all is successful you should have godot/bin/godot.windows.opt.tools.32.exe
+1. Run: `scons target=release_debug bits=32 custom_modules=../godot-sentry-native/modules/sentry`
+1. If all is successful you should have: `godot/bin/godot.windows.opt.tools.32.exe`
 
 ## Create Sentry.io account
 Sentry.io is a hosted service that listens for crashes from your game, saves them, then presents them in a pretty dashboard. It's free for the first 5,000 crashes per month. Or you can run your own sentry server if you prefer.
@@ -108,11 +117,11 @@ So far we've got the Godot editor to report crashes, but what we really want is 
 1. Be sure to copy `godot/bin/sentry.dll` and `godot/bin/crashpad_handler.exe` to your game's export folder
 1. Don't forget to upload symbol file any time you rebuild: `sentry-cli upload-dif -o your-organization -p your-project --wait godot.windows.opt.32.pdb`
 
-## Setup Sentry.io in your own Godot Project's
-To have your own Game's report to Sentry.io 
+## Setup Sentry.io in your own Godot Game Project's
+To have your own games report crashes to Sentry.io:
 1. Set Sentry Dsn in Project Settings
-1. Export using the Custom Export Template 
-1. Be sure to copy sentry.dll and crashpad_handler.exe to your Export folder and ship with your game.
+1. Export using the Custom Export Template
+1. Be sure to copy `godot/bin/sentry.dll` and `godot/bin/crashpad_handler.exe` to your Export folder and ship with your game.
 
 ## Options in Project Settings
 * String **third_party/sentry/dsn** \

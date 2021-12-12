@@ -41,3 +41,4 @@ Example/export/*
 
 # Sentry
 thirdparty/sentry-native/*
+!thirdparty/sentry-native/EXTRACT_HERE.md
