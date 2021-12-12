@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+# Python
+*.pyc
+*/__pycache/*
+
+# Example
+Example/.import/*
+Example/export/*
+
+# Sentry
+thirdparty/sentry-native/*
