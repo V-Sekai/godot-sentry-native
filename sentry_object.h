@@ -19,7 +19,6 @@ public:
 
 	void _set_username(String p_username);
 	void _send_event(String p_text);
-	void _test_crash();
 	
 	Sentry();
 	~Sentry();

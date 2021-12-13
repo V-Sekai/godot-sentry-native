@@ -69,7 +69,7 @@ Sentry::Sentry() {
   // Attach godot.log file to crash report.
   String data_dir = OS::get_singleton()->get_user_data_dir();
   sentry_options_add_attachment(options,
-                                String(data_dir + "/godot.log").utf8());
+                                String(data_dir + "/logs/godot.log").utf8());
 
   sentry_init(options);
 
@@ -92,7 +92,6 @@ Sentry::~Sentry() { sentry_close(); }
 void Sentry::_bind_methods() {
   ClassDB::bind_method(D_METHOD("init"), &Sentry::_init);
   ClassDB::bind_method(D_METHOD("set_username"), &Sentry::_set_username);
-	ClassDB::bind_method(D_METHOD("test_crash"), &Sentry::_test_crash);
 	ClassDB::bind_method(D_METHOD("send_event"), &Sentry::_send_event);	
 }
 
@@ -110,12 +109,6 @@ void Sentry::_set_username(String p_username) {
   sentry_value_set_by_key(user, "username",
                           sentry_value_new_string(p_username.utf8()));
   sentry_set_user(user);
-}
-
-void Sentry::_test_crash()
-{
-	// Ka-boom!
-	*(char*)0 = 0;
 }
 
 void Sentry::_send_event(String p_text)

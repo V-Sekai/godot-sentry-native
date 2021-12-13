@@ -2,7 +2,7 @@ extends Control
 
 
 func _on_Crash_pressed():
-	Sentry.test_crash()
+	OS.crash("Crash Event!")
 
 
 func _on_SendEvent_pressed():
