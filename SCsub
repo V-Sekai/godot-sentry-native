@@ -7,11 +7,21 @@ module_env = env.Clone()
 
 module_path = pathlib.Path(Dir(".").abspath)
 
-env.Append(LINKFLAGS=[module_path / "thirdparty/sentry-native/build/libsentry.a"])
-env.Append(LIBS=["version", "winhttp", "dbghelp",])
-CPPPATH = [
-"thirdparty/sentry-native/include"
-]
+env.Append(
+    LINKFLAGS=[
+        module_path / "thirdparty/sentry-native/build/libsentry.a",
+        module_path / "thirdparty/sentry-native/build/external/libbreakpad_client.a",
+    ]
+)
+env.Append(
+    LIBS=[
+        "version",
+        "winhttp",
+        "dbghelp",
+    ]
+)
+CPPPATH = ["thirdparty/sentry-native/include"]
+
 module_env.Append(CPPPATH=CPPPATH)
 # Godot source files
 module_env.add_source_files(module_env.modules_sources, "*.cpp")
