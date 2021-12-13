@@ -38,7 +38,7 @@ Continue only once you've got Godot compiling and running. For the rest of the i
 We need the sentry.dll and sentry.lib built before building godot-sentry-native
 1. `cd godot-sentry-native/thirdparty/sentry-native`
 1. Run: `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"`
-1. Run: `cmake -B build -DSENTRY_BACKEND=crashpad -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSENTRY_BUILD_RUNTIMESTATIC=ON -A Win32  -S .`
+1. Run: `cmake -B build -DSENTRY_BACKEND=inproc -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSENTRY_LIBRARY_TYPE=STATIC -DCRASHPAD_ZLIB_SYSTEM=OFF -DSENTRY_EXPORT_SYMBOLS=no -DSENTRY_BUILD_EXAMPLES=off -G"Ninja" -S .`
 1. Run: `cmake --build build --config RelWithDebInfo --parallel`
 1. Copy files to your godot\bin\ folder:
    * `copy build\RelWithDebInfo\sentry.dll ..\..\..\godot\bin\`
@@ -49,8 +49,8 @@ We need the sentry.dll and sentry.lib built before building godot-sentry-native
 ## Build Godot editor with godot-sentry-native
 This is to build Godot editor for testing integration
 1. cd to your godot folder
-1. Run: `scons target=release_debug bits=32 custom_modules=../godot-sentry-native/modules/sentry`
-1. If all is successful you should have: `godot/bin/godot.windows.opt.tools.32.exe`
+1. Run: `scons target=release_debug custom_modules=../sentry`
+1. If all is successful you should have: `godot/bin/godot.windows.opt.tools.exe`
 
 ## Create Sentry.io account
 Sentry.io is a hosted service that listens for crashes from your game, saves them, then presents them in a pretty dashboard. It's free for the first 5,000 crashes per month. Or you can run your own sentry server if you prefer.
@@ -66,7 +66,7 @@ Sentry.io is a hosted service that listens for crashes from your game, saves the
       * Leave your browser on this page, Note in the corner of the page it says **Waiting to receive first event to continue**
 
 ## Test it out with the example project
-1. Run your custom build of Godot: `godot/bin/godot.windows.opt.tools.32.exe`
+1. Run your custom build of Godot: `godot/bin/godot.windows.opt.tools.exe`
 1. Import the example project: `godot-sentry-native/example/project.godot`
 1. Click **Project** -> **Project Settings** 
 1. At the bottom of the list look for  **Third Party** and click **Sentry** 

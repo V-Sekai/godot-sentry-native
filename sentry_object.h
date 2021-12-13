@@ -1,7 +1,7 @@
 #ifndef SENTRY_OBJECT_H
 #define SENTRY_OBJECT_H
 
-#include "core/object.h"
+#include "core/object/object.h"
 
 class Sentry : public Object {
 	GDCLASS(Sentry, Object);

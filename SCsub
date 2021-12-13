@@ -5,16 +5,13 @@ import pathlib
 Import("env")
 module_env = env.Clone()
 
-# Paths
 module_path = pathlib.Path(Dir(".").abspath)
 
-env.Append(LIBPATH=[module_path / "thirdparty/sentry-native/build/RelWithDebInfo"])
-env.Append(LINKFLAGS=["sentry.lib"])
-
+env.Append(LINKFLAGS=[module_path / "thirdparty/sentry-native/build/libsentry.a"])
+env.Append(LIBS=["version", "winhttp", "dbghelp",])
 CPPPATH = [
 "thirdparty/sentry-native/include"
 ]
 module_env.Append(CPPPATH=CPPPATH)
-
 # Godot source files
 module_env.add_source_files(module_env.modules_sources, "*.cpp")
