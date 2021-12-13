@@ -49,10 +49,6 @@ Sentry::Sentry() {
     return;
   }
 
-  // Disable Godot's Crash handler, otherwise Sentry won't get full callstack
-  // when running debug or release_debug build
-  OS::get_singleton()->disable_crash_handler();
-
   String sentry_db_path =
       OS::get_singleton()->get_user_data_dir() +
       "/.sentry-native"; // sentry needs a path it can write to
