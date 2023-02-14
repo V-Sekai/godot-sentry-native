@@ -44,16 +44,19 @@ Continue only once you've got Godot compiling and running. For the rest of the i
 We need the sentry.dll and sentry.lib built before building godot-sentry-native
 
 1. `cd thirdparty/sentry-native`
-1. Run: `cmake -B build -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ -DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres -DSENTRY_BACKEND=breakpad -DSENTRY_BUILD_SHARED_LIBS=NO -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSENTRY_BUILD_EXAMPLES=off -G"MinGW Makefiles"`
-1. Run: `mingw32-make.exe -j8`
+1. Run: `cmake -B build -DSENTRY_BACKEND=breakpad -DSENTRY_BUILD_SHARED_LIBS=NO -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSENTRY_BUILD_EXAMPLES=off -G"MinGW Makefiles"`
+1. Run: `cd build && mingw32-make.exe -j8`
 
-## Build Godot editor with godot-sentry-native
+## Build Godot editor with godot-sentry-native with mingw-llvm
 
 This is to build Godot editor for testing integration
 
 1. cd to your godot folder
-1. Run: `scons target=release_debug custom_modules=../modules`
+1. Run: `scons target=release_debug custom_modules=../modules use_llvm=yes use_mingw=yes LINKFLAGS='-Wl,-pdb=' CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview'`
 1. If everything is successful, you should have: `godot/bin/godot.windows.opt.tools.exe`
+1. `scoop install sentry-cli`
+1. Upload debug symbols. 
+1. `sentry-cli debug-files upload bin --org godot --project godot-project` Use `--wait` if you want to see errors.
 
 ## Create a Gitchtip account
 
