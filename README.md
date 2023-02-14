@@ -31,8 +31,8 @@ Continue only once you've got Godot compiling and running. For the rest of the i
 
 ## Clone this repo
 
-1. git clone https://github.com/SilverCreekEntertainment/godot-sentry-native
-1. Or download and extract zip https://github.com/SilverCreekEntertainment/godot-sentry-native/archive/refs/heads/master.zip
+1. git clone https://github.com/V-Sekai/godot-sentry-native
+1. Or download and extract zip https://github.com/V-Sekai/godot-sentry-native/archive/refs/heads/master.zip
 
 ## Download Sentry Source Code
 
