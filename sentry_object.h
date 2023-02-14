@@ -12,14 +12,14 @@ protected:
 	static void _bind_methods();
 	void _init();
 
-	bool send_ip_address;
+	bool send_ip_address = false;
 
 public:
 	static Sentry *get_singleton();
 
 	void _set_username(String p_username);
 	void _send_event(String p_text);
-	
+
 	Sentry();
 	~Sentry();
 };

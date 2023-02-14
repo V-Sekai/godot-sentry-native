@@ -6,7 +6,10 @@
 
 static Sentry *_sentry = NULL;
 
-void register_sentry_types() {
+void initialize_sentry_module(ModuleInitializationLevel p_level) {
+  if (p_level != MODULE_INITIALIZATION_LEVEL_SERVERS) {
+    return;
+  }
   ClassDB::register_class<Sentry>();
 
   // Automatically create singleton instance, this is so that sentry can be
@@ -16,6 +19,9 @@ void register_sentry_types() {
       Engine::Singleton("Sentry", Sentry::get_singleton()));
 }
 
-void unregister_sentry_types() {
+void uninitialize_sentry_module(ModuleInitializationLevel p_level) {
+  if (p_level != MODULE_INITIALIZATION_LEVEL_SERVERS) {
+    return;
+  }
   memdelete(_sentry);
 }
