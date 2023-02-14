@@ -89,6 +89,7 @@ void Sentry::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("init"), &Sentry::_init);
 	ClassDB::bind_method(D_METHOD("set_username", "username"), &Sentry::_set_username);
 	ClassDB::bind_method(D_METHOD("send_event", "event"), &Sentry::_send_event);
+	ClassDB::bind_method(D_METHOD("send_breadcrumb", "type", "message"), &Sentry::_send_breadcrumb); 
 }
 
 void Sentry::_init() {
@@ -110,4 +111,8 @@ void Sentry::_set_username(String p_username) {
 
 void Sentry::_send_event(String p_text) {
 	sentry_capture_event(sentry_value_new_message_event(SENTRY_LEVEL_INFO, "custom", p_text.utf8().get_data()));
+}
+
+void Sentry::_send_breadcrumb(String p_type, String p_message) {
+	sentry_add_breadcrumb(sentry_value_new_breadcrumb(p_type.utf8().get_data(), p_message.utf8().get_data()));
 }

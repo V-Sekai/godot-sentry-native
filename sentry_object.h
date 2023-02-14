@@ -19,6 +19,7 @@ public:
 
 	void _set_username(String p_username);
 	void _send_event(String p_text);
+	void _send_breadcrumb(String p_type, String p_message);
 
 	Sentry();
 	~Sentry();
