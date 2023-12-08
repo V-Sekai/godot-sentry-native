@@ -1,3 +1,0 @@
-C:\Users\ernes\scoop\apps\cmake\3.25.2\bin\cmake.exe -E rm -f CMakeFiles\sentry_fuzz_json.dir/objects.a
-C:\Users\ernes\scoop\apps\llvm-mingw\current\bin\llvm-ar.exe qc CMakeFiles\sentry_fuzz_json.dir/objects.a @CMakeFiles\sentry_fuzz_json.dir\objects1
-C:\Users\ernes\scoop\apps\llvm-mingw\current\bin\c++.exe -O3 -g -DNDEBUG -Wl,--whole-archive CMakeFiles\sentry_fuzz_json.dir/objects.a -Wl,--no-whole-archive -o sentry_fuzz_json.exe -Wl,--out-implib,libsentry_fuzz_json.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\sentry_fuzz_json.dir\linkLibs.rsp
