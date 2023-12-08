@@ -41,11 +41,11 @@ Example/export/*
 
 
 # Sentry
-thirdparty/sentry-native/*.md
-thirdparty/sentry-native/*.txt
+!thirdparty/sentry-native/*.md
+!thirdparty/sentry-native/*.txt
 thirdparty/sentry-native/build/*
 thirdparty/sentry-native/build/tests/*
 thirdparty/sentry-native/build/tests/unit/*
 thirdparty/sentry-native/build/tests/unit/CMakeFiles/*
 !thirdparty/sentry-native/EXTRACT_HERE.md
-example/.godot/
+example/.godot/*
