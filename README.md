@@ -58,10 +58,6 @@ This is to build Godot editor for testing integration
 1. Upload debug symbols. 
 1. `sentry-cli debug-files upload bin --org godot --project godot-project` Use `--wait` if you want to see errors.
 
-## Create a Gitchtip account
-
-Documentation to be written.
-
 ## Create a Sentry.io account
 
 Sentry.io is a hosted service that listens for crashes from your game, saves them, then presents them in a pretty dashboard. It's free for the first 5,000 crashes per month. Or you can run your own sentry server if you prefer.
